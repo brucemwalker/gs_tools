@@ -43,6 +43,14 @@ So as I uncovered little shortcomings that I figured I could do
 something about myself I began to work on them, starting with
 Provisioning.
 
+## See Also
+
+Grandstream Phonebook XML syntax - https://www.grandstream.com/hubfs/Product_Documentation/gxv33xx_xml_phonebook_guide.pdf?hsLang=en
+
+rfc2426 - vCard MIME Directory Profile [version 3.0] - https://datatracker.ietf.org/doc/html/rfc2426
+
+
+
 ## Fine Print
 
 Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
