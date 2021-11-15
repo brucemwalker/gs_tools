@@ -7,8 +7,9 @@ convert vCard contacts file(s) to Grandstream Addressbook XML
 - or export from Google Contacts using vCard format (I recommend CSV instead)
 
 Author: Bruce Walker <bruce.walker@gmail.com>
-modified: Nov 14, 2021
 created: Nov 9, 2021
+
+Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
 
 Features
 - to pretty-print the output: xmllint --format contacts.xml

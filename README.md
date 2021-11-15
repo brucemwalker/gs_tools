@@ -21,3 +21,29 @@ Tools to support using and administrating Grandstream Networks IP-phones and ATA
 - some advice on connecting and using the GRP26XX devices in a Small Office / Home Office environment.
 - basic P-values to get your device connected to voip.ms fast.
 
+## What you need
+
+- The command-line tools require a recent-ish Python 3 to be installed.
+- Tested on FreeBSD and macOS.
+
+## Motivation
+
+I began building and collecting these tools and ancillary stuff
+after I bought a Grandstream GRP2612W.  I was taken right away by
+how much this device in particular is The Perfect Home Office Phone
+that I wish I had years ago. It's very flexible, nicely styled,
+and, with its built-in WiFi, completely portable.
+
+But this product feels like it targets the larger scale deployment
+where you'd expect to find full-time IT staff using a management
+console.  As such it is not very end-user "consumer friendly". It's
+also missing some niceties like professional-sounding ringtones.
+
+So as I uncovered little shortcomings that I figured I could do
+something about myself I began to work on them, starting with
+Provisioning.
+
+## Fine Print
+
+Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
+

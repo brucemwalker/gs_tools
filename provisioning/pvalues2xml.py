@@ -5,6 +5,8 @@
 # Author: Bruce Walker <bruce.walker@gmail.com>
 # modified: Nov 7, 2021
 # created: Nov 5, 2021
+#
+# Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
 
 # Usage:
 #   pvalues2xml.py [-c] [-o config.xml] [-m mac] [config.txt [...]]
@@ -21,11 +23,7 @@ import os.path, sys, getopt
 
 # refs
 #  https://docs.python.org/3/library/xml.etree.elementtree.html
-# comments
-# https://docs.python.org/3.9/library/xml.etree.elementtree.html#xml.etree.ElementTree.Comment
-# ordering
-# https://docs.python.org/3.9/library/xml.etree.elementtree.html#xml.etree.ElementTree.canonicalize
-# https://docs.python.org/3/library/getopt.html
+#  https://docs.python.org/3/library/getopt.html
 
 class Syntax(Exception): pass
 class Comment(Exception): pass

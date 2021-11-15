@@ -6,9 +6,9 @@ convert Google Contacts CSV file to Grandstream Addressbook XML
 - export from Google Contacts; use Google CSV format from All contacts
 
 Author: Bruce Walker <bruce.walker@gmail.com>
-modified: Nov 7, 2021 (argv)
-modified: Nov 2, 2021
 created: Oct 28, 2021
+
+Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
 
 Features
 - ringtones per-contact are supported through Google contacts.
