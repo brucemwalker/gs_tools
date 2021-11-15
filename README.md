@@ -13,3 +13,11 @@ Provisioning
 Discovery
 - view provisioning beacons
 
+Ringtones
+- some reasonably decent recordings of vintage terminals and business phones as alternatives to the factory installed ones.
+
+Hints, How-Tos
+- cheat-sheet for using SoX to convert Grandstream ringtones, adjust the volume of existing ones, etc.
+- some advice on connecting and using the GRP26XX devices in a Small Office / Home Office environment.
+- basic P-values to get your device connected to voip.ms fast.
+
