@@ -60,7 +60,6 @@ output.
 '''
 
 DEFAULT_FAVES = 'Starred'
-GSTARRED = '* starred'
 
 """
 Grandstream GRP26xx screws up dialing and phonebook editing
@@ -69,8 +68,6 @@ with any formating chars at all in the phone numbers.
 Set ENABLE_PRETTYPRINT=True to allow some formatting anyway.
 -P   - enable pretty-print
 """
-
-ENABLE_PRETTYPRINT = False
 
 """
 todo:
@@ -87,8 +84,11 @@ refs
  https://www.grandstream.com/hubfs/Product_Documentation/GXP_XML_phonebook_guide.pdf
 """
 
+def stats(d={}):
+	print(f'{d['seen']} contacts seen\n{d['imported']} contacts imported')
+
 def main(argv):
-	from import_contacts import csv_to_phonebook, vcard_to_phonebook
+	from contacts import csv_to_phonebook, vcard_to_phonebook, GSTARRED
 	import pbxml
 	import xml.etree.ElementTree as ET
 	import sys, getopt, os.path
@@ -96,9 +96,11 @@ def main(argv):
 	out = sys.stdout
 	incgroups = []
 	faves = DEFAULT_FAVES
+	ftype = 'csv'
+	verbose = False
 
 	try:
-		opts, args = getopt.getopt(argv[1:], "hfPF:g:o:")
+		opts, args = getopt.getopt(argv[1:], "hfPvF:g:o:t:")
 	except getopt.GetoptError:
 		print(BRIEF, file=sys.stderr)
 		sys.exit(2)
@@ -107,30 +109,35 @@ def main(argv):
 			print(HELP)
 			sys.exit()
 		elif opt == '-P':
-			global ENABLE_PRETTYPRINT
-			ENABLE_PRETTYPRINT = True	# "Bad developer! No biscuit!"
+			pp = True
 		elif opt == '-o':
 			out = arg
 		elif opt == '-f':
 			incgroups += [GSTARRED]
 		elif opt == '-g':
 			incgroups += [arg]
+		elif opt == '-t':
+			ftype = arg
 		elif opt == '-F':
 			faves = arg
+		elif opt == '-v':
+			verbose = True
 
 	addrbook = ET.Element('AddressBook')
 	pbxml.el_addtext(addrbook, 'version', '1')
 	pbxml.get_or_insert_group(addrbook, faves)
 
 	if not args:
-		csv_to_phonebook(sys.stdin, addrbook, incgroups, faves)
+		stats = csv_to_phonebook(sys.stdin, addrbook, incgroups, faves)
+		if verbose: pstats(stats)
 	else:
 		for csvfile in args:
 			if not os.path.isfile(csvfile):
 				print(f'{csvfile}: not found', file=sys.stderr)
 				continue
 			with open(csvfile, newline='') as cf:
-				csv_to_phonebook(cf, addrbook, incgroups, faves)
+				stats = csv_to_phonebook(cf, addrbook, incgroups, faves)
+				if verbose: pstats(stats)
 
 	# create the Grandstream-formatted XML phonebook
 

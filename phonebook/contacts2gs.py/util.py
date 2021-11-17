@@ -7,6 +7,8 @@ created: Nov 16, 2021
 Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
 """
 
+ENABLE_PRETTYPRINT = False
+
 # reformat a phone number ph removing crap that confuses the phone
 # - see notes above re Grandstream terminals.
 
