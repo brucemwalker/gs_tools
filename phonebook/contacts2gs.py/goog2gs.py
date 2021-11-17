@@ -88,7 +88,6 @@ refs
 """
 
 import xml.etree.ElementTree as ET
-import os.path, sys, getopt
 
 # return the string value of a column from a CSV row
 # - else return default value (default-default: empty string)
@@ -260,12 +259,14 @@ def csv_to_phonebook(csvin, phonebook, incgroups, faves):
 		phonebook.append(contact)
 
 def main(argv):
+	import sys, getopt, os.path
+
 	out = sys.stdout
 	incgroups = []
 	faves = DEFAULT_FAVES
 
 	try:
-		opts, args = getopt.getopt(argv, "hfPF:g:o:")
+		opts, args = getopt.getopt(argv[1:], "hfPF:g:o:")
 	except getopt.GetoptError:
 		print(BRIEF, file=sys.stderr)
 		sys.exit(2)
@@ -309,5 +310,6 @@ def main(argv):
 		f.write(ET.tostring(addrbook, encoding="unicode"))
 
 if __name__ == "__main__":
-	main(sys.argv[1:])
+	from sys import argv
+	main(argv)
 
