@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 """
 convert Google Contacts CSV or vCard file to Grandstream Addressbook XML
 
@@ -23,54 +21,6 @@ Features
   and appear in a Starred tab of the Groups menu.
 
 To-Do
-"""
-
-BRIEF = 'usage: goog2gs [-hfP] [-F faves] [-g inc-group [...]] [-o xml-file] [csv-file [...]]'
-
-HELP = f'''{BRIEF}
-
-Convert Google Contacts CSV or vCard export files into Grandstream phonebook
-XML records.
-
-  -g group
-          create an addressbook group 'group' and include contacts
-          with this label in the named group.
-          Every -g option adds another group.
-  -f      include 'starred' contacts (faves) in a group
-          called 'Starred' by default.
-  -F name
-          replace the default faves group name.
-  -o file
-          write Grandstream phonebook XML to 'file'.
-          Output is written to standard output if this
-          option is missing.
-  -h      help (this text).
-  -P      pretty-print phone numbers (warning: Grandstream phones
-          misbehave with these).
-
-Additional arguments are read in order for contact files to include.
-Standard input is read in the absence of args.
-
-If no -g options or a -f option are specified all contacts found
-in the given files are included in the phonebook output.
-
-If a -f or one or more -g options are given then only contacts
-which are members of that group list are included in the phonebook
-output.
-'''
-
-DEFAULT_FAVES = 'Starred'
-
-"""
-Grandstream GRP26xx screws up dialing and phonebook editing
-with any formating chars at all in the phone numbers.
-    "Number is required and must only contain DTMF digits"
-Set ENABLE_PRETTYPRINT=True to allow some formatting anyway.
--P   - enable pretty-print
-"""
-
-"""
-todo:
 - in pbgroup spec, what does <Primary> do?
 
 Implementation notes:
@@ -83,6 +33,54 @@ Implementation notes:
 refs
  https://www.grandstream.com/hubfs/Product_Documentation/GXP_XML_phonebook_guide.pdf
 """
+
+BRIEF = 'usage: goog2gs [-hfPv] [-F faves] [-g inc-group [...]] [-o xml-file] [-t "vcard|csv"] [csv-file [...]]'
+
+HELP = f'''{BRIEF}
+
+Convert Google Contacts CSV or vCard export files into Grandstream phonebook
+XML records.
+
+  -g pbgroup
+          create a phonebook group 'pbgroup' and include contacts
+          with this label in it.
+          Every -g option adds another group.
+  -f      include 'starred' contacts (faves) in a group
+          called 'Starred' by default.
+  -F name
+          replace the default faves group name.
+  -o xmlfile
+          write Grandstream phonebook XML to 'xmlfile'.
+          Output is written to standard output if this
+          option is missing.
+  -h      help (this text).
+  -t ftype
+          files will be expected to be of specified type,
+		  which should be one of 'csv' or 'vcard'.
+		  By default we make an educated guess for each file,
+		  falling back on CSV as a last resort.
+  -v      verbose; write stats, comments to stdout
+
+Additional arguments are read in order for contact files to include.
+Standard input is read in the absence of args.
+
+If no -g options or a -f option are specified all contacts found
+in the given files are included in the phonebook output.
+
+If a -f or one or more -g options are given then only contacts
+which are members of that group list are included in the phonebook
+output.
+
+Grandstream GRP26xx screws up dialing and phonebook editing
+with any formating chars at all in the phone numbers.
+    "Number is required and must only contain DTMF digits"
+Set ENABLE_PRETTYPRINT=True to allow some formatting anyway.
+-P   - enable pretty-print
+'''
+
+DEFAULT_FAVES = 'Starred'
+DEFAULT_TYPE = 'csv'
+
 
 # XXX would it better to spelunk the phonebook XML object?
 #     yes; yes it would.
@@ -99,16 +97,17 @@ def pstats(d={}, verbosity=0):
 		return
 	print(f"{n} numbers imported", file=sys.stderr)
 
+
 def main(argv):
 	import contacts as CT
 	import pbxml
 	import xml.etree.ElementTree as ET
 	import sys, getopt, os.path
 
-	out = sys.stdout
-	incgroups = []
 	faves = DEFAULT_FAVES
-	ftype = 'csv'
+	ftype = DEFAULT_TYPE
+	incgroups = []
+	out = sys.stdout
 	verbosity = 0
 
 	try:
@@ -156,8 +155,4 @@ def main(argv):
 	with sys.stdout if out==sys.stdout else open(out, 'w') as f:
 		f.write('<?xml version="1.0" encoding="UTF-8"?>')
 		f.write(ET.tostring(addrbook, encoding="unicode"))
-
-if __name__ == "__main__":
-	from sys import argv
-	main(argv)
 
