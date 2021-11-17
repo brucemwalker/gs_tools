@@ -84,16 +84,23 @@ refs
  https://www.grandstream.com/hubfs/Product_Documentation/GXP_XML_phonebook_guide.pdf
 """
 
-def pstats(d={}):
+# XXX would it better to spelunk the phonebook XML object?
+#     yes; yes it would.
+
+def pstats(d={}, verbosity=0):
 	import sys
 
-	print(f"""\
-{d.get('seen','0')} contacts seen
-{d.get('imported','0')} contacts imported
-""", file=sys.stderr)
+	if verbosity < 1:
+		return
+	t, i, n = d.get('seen','0'), d.get('imported','0'), d.get('numbers','0')
+	print(f"{t} contacts seen\n{i} contacts imported", file=sys.stderr)
+
+	if verbosity < 2:
+		return
+	print(f"{n} numbers imported", file=sys.stderr)
 
 def main(argv):
-	from contacts import csv_to_phonebook, vcard_to_phonebook, GSTARRED
+	import contacts as CT
 	import pbxml
 	import xml.etree.ElementTree as ET
 	import sys, getopt, os.path
@@ -102,7 +109,7 @@ def main(argv):
 	incgroups = []
 	faves = DEFAULT_FAVES
 	ftype = 'csv'
-	verbose = False
+	verbosity = 0
 
 	try:
 		opts, args = getopt.getopt(argv[1:], "hfPvF:g:o:t:")
@@ -118,7 +125,7 @@ def main(argv):
 		elif opt == '-o':
 			out = arg
 		elif opt == '-f':
-			incgroups += [GSTARRED]
+			incgroups += [CT.GSTARRED]
 		elif opt == '-g':
 			incgroups += [arg]
 		elif opt == '-t':
@@ -126,23 +133,23 @@ def main(argv):
 		elif opt == '-F':
 			faves = arg
 		elif opt == '-v':
-			verbose = True
+			verbosity += 1
 
 	addrbook = ET.Element('AddressBook')
 	pbxml.el_addtext(addrbook, 'version', '1')
 	pbxml.get_or_insert_group(addrbook, faves)
 
 	if not args:
-		stats = csv_to_phonebook(sys.stdin, addrbook, incgroups, faves)
-		if verbose: pstats(stats)
+		stats = CT.csv_to_phonebook(sys.stdin, addrbook, incgroups, faves)
+		pstats(stats, verbosity)
 	else:
 		for csvfile in args:
 			if not os.path.isfile(csvfile):
 				print(f'{csvfile}: not found', file=sys.stderr)
 				continue
 			with open(csvfile, newline='') as cf:
-				stats = csv_to_phonebook(cf, addrbook, incgroups, faves)
-				if verbose: pstats(stats)
+				stats = CT.csv_to_phonebook(cf, addrbook, incgroups, faves)
+				pstats(stats, verbosity)
 
 	# create the Grandstream-formatted XML phonebook
 

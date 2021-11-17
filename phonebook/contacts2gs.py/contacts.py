@@ -45,8 +45,11 @@ def getsubcol(row, column_name):
 def csv_to_phonebook(csvin, phonebook, incgroups, faves):
 	import csv
 
+	stats = {'seen': 0, 'imported': 0, 'numbers': 0}
+
 	reader = csv.DictReader(csvin)
 	for row in reader:
+		stats['seen'] += 1
 
 		# include only Contacts in the listed groups,
 		#   or all Contacts if no groups specified
@@ -123,8 +126,9 @@ def csv_to_phonebook(csvin, phonebook, incgroups, faves):
 		# insert this fully-fleshed Contact to the phonebook
 
 		phonebook.append(contact)
+		stats['imported'] += 1
 
-	return {}
+	return stats
 
 # slurp the content of vCard stream vcardin into Grandstream phonebook
 #
@@ -136,8 +140,11 @@ def csv_to_phonebook(csvin, phonebook, incgroups, faves):
 def vcard_to_phonebook(vcardin, phonebook, incgroups, faves):
 	import vcard
 
+	stats = {'seen': 0, 'imported': 0, 'numbers': 0}
+
 	reader = vcard.vCardReader(vcardin)
 	for vc in reader:
+		stats['seen'] += 1
 
 		# include only Contacts in the listed groups,
 		#   or all Contacts if no groups specified
@@ -231,6 +238,7 @@ def vcard_to_phonebook(vcardin, phonebook, incgroups, faves):
 		# insert this fully-fleshed Contact to the phonebook
 
 		phonebook.append(contact)
+		stats['imported'] += 1
 
-	return {}
+	return stats
 
