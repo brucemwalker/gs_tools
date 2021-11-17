@@ -124,6 +124,7 @@ def csv_to_phonebook(csvin, phonebook, incgroups, faves):
 
 		phonebook.append(contact)
 
+	return {}
 
 # slurp the content of vCard stream vcardin into Grandstream phonebook
 #
@@ -230,4 +231,6 @@ def vcard_to_phonebook(vcardin, phonebook, incgroups, faves):
 		# insert this fully-fleshed Contact to the phonebook
 
 		phonebook.append(contact)
+
+	return {}
 

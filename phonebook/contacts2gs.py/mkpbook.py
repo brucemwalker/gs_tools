@@ -84,8 +84,13 @@ refs
  https://www.grandstream.com/hubfs/Product_Documentation/GXP_XML_phonebook_guide.pdf
 """
 
-def stats(d={}):
-	print(f'{d['seen']} contacts seen\n{d['imported']} contacts imported')
+def pstats(d={}):
+	import sys
+
+	print(f"""\
+{d.get('seen','0')} contacts seen
+{d.get('imported','0')} contacts imported
+""", file=sys.stderr)
 
 def main(argv):
 	from contacts import csv_to_phonebook, vcard_to_phonebook, GSTARRED
