@@ -1,5 +1,5 @@
 """
-XML bts and pieces
+XML bits and pieces
 
 Author: Bruce Walker <bruce.walker@gmail.com>
 created: Nov 16, 2021

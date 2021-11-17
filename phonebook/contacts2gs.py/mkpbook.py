@@ -88,9 +88,8 @@ refs
 """
 
 def main(argv):
-	from goog2gs import csv_to_phonebook
+	from import_contacts import csv_to_phonebook, vcard_to_phonebook
 	import pbxml
-	from vcard2gs import vcard_to_phonebook
 	import xml.etree.ElementTree as ET
 	import sys, getopt, os.path
 
