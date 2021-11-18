@@ -17,6 +17,25 @@ from util import *
 # default name Google Contacts uses for favourites group
 GSTARRED = '* starred'
 
+# inspect the content of file-descriptor and guess its format
+
+def sniff(of):
+	bestguess = '?'
+	try:
+		if of.name.lower().endswith('.vcf'):
+			bestguess = 'vcard'
+		elif of.name.lower().endswith('.csv'):
+			bestguess = 'csv'
+		s = of.readline()
+		of.seek(0)
+		if s.count(',') > 100:
+			bestguess = 'csv'
+		elif s.upper().startswith('BEGIN:VCARD'):
+			bestguess = 'vcard'
+	finally:
+		...
+	return bestguess
+
 # return the string value of a column from a CSV row
 # - else return default value (default-default: empty string)
 

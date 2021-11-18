@@ -70,7 +70,9 @@ in the given files are included in the phonebook output.
 If a -f or one or more -g options are given then only contacts
 which are members of that group list are included in the phonebook
 output.
+'''
 
+'''
 Grandstream GRP26xx screws up dialing and phonebook editing
 with any formating chars at all in the phone numbers.
     "Number is required and must only contain DTMF digits"
@@ -79,7 +81,6 @@ Set ENABLE_PRETTYPRINT=True to allow some formatting anyway.
 '''
 
 DEFAULT_FAVES = 'Starred'
-DEFAULT_TYPE = 'csv'
 
 
 # XXX would it better to spelunk the phonebook XML object?
@@ -105,7 +106,7 @@ def main(argv):
 	import sys, getopt, os.path
 
 	faves = DEFAULT_FAVES
-	ftype = DEFAULT_TYPE
+	ftype = ""
 	incgroups = []
 	out = sys.stdout
 	verbosity = 0
@@ -139,15 +140,31 @@ def main(argv):
 	pbxml.get_or_insert_group(addrbook, faves)
 
 	if not args:
-		stats = CT.csv_to_phonebook(sys.stdin, addrbook, incgroups, faves)
+		if not ftype:
+			ftype = CT.sniff(sys.stdin)
+		if ftype == 'csv':
+			stats = CT.csv_to_phonebook(sys.stdin, addrbook, incgroups, faves)
+		elif ftype == 'vcard':
+			stats = CT.vcard_to_phonebook(sys.stdin, addrbook, incgroups, faves)
+		else:
+			print('unrecognized contact format', file=sys.stderr)
+			return		# XXX exit
 		pstats(stats, verbosity)
 	else:
-		for csvfile in args:
-			if not os.path.isfile(csvfile):
-				print(f'{csvfile}: not found', file=sys.stderr)
+		for ctfile in args:
+			if not os.path.isfile(ctfile):
+				print(f'{ctfile}: not found', file=sys.stderr)
 				continue
-			with open(csvfile, newline='') as cf:
-				stats = CT.csv_to_phonebook(cf, addrbook, incgroups, faves)
+			with open(ctfile, newline='') as cf:
+				ft = ftype if ftype else CT.sniff(cf)
+				if ft == 'csv':
+					stats = CT.csv_to_phonebook(cf, addrbook, incgroups, faves)
+				elif ft == 'vcard':
+					stats = CT.vcard_to_phonebook(cf, addrbook, incgroups, faves)
+				else:
+					print(f'{ctfile}: unrecognized contact format',
+						file=sys.stderr)
+					continue
 				pstats(stats, verbosity)
 
 	# create the Grandstream-formatted XML phonebook
