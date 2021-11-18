@@ -1,0 +1,4 @@
+#!/bin/sh -f
+
+python -m zipapp contacts2gs.py -p '/usr/bin/env python3' -o contacts2gs -c
+

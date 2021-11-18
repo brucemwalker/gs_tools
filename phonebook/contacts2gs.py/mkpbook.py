@@ -59,7 +59,7 @@ XML records.
 		  which should be one of 'csv' or 'vcard'.
 		  By default we make an educated guess for each file,
 		  falling back on CSV as a last resort.
-  -v      verbose; write stats, comments to stdout
+  -v      verbose; write stats, comments to stderr
 
 Additional arguments are read in order for contact files to include.
 Standard input is read in the absence of args.
@@ -91,12 +91,15 @@ def pstats(d={}, verbosity=0):
 
 	if verbosity < 1:
 		return
+	nm = d.get('name','?')
 	t, i, n = d.get('seen','0'), d.get('imported','0'), d.get('numbers','0')
-	print(f"{t} contacts seen\n{i} contacts imported", file=sys.stderr)
+
+	print(f'{nm}:', file=sys.stderr)
+	print(f"  {t} contacts seen\n  {i} contacts imported", file=sys.stderr)
 
 	if verbosity < 2:
 		return
-	print(f"{n} numbers imported", file=sys.stderr)
+	print(f"  {n} numbers imported", file=sys.stderr)
 
 
 def main(argv):

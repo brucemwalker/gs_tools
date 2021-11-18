@@ -64,7 +64,7 @@ def getsubcol(row, column_name):
 def csv_to_phonebook(csvin, phonebook, incgroups, faves):
 	import csv
 
-	stats = {'seen': 0, 'imported': 0, 'numbers': 0}
+	stats = {'seen': 0, 'imported': 0, 'numbers': 0, 'name': csvin.name}
 
 	reader = csv.DictReader(csvin)
 	for row in reader:
@@ -159,7 +159,7 @@ def csv_to_phonebook(csvin, phonebook, incgroups, faves):
 def vcard_to_phonebook(vcardin, phonebook, incgroups, faves):
 	import vcard
 
-	stats = {'seen': 0, 'imported': 0, 'numbers': 0}
+	stats = {'seen': 0, 'imported': 0, 'numbers': 0, 'name': vcardin.name}
 
 	reader = vcard.vCardReader(vcardin)
 	for vc in reader:
