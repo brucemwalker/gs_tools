@@ -11,7 +11,7 @@ Peculiarities
   cfgffeeddccbbaa.xml
   cfggrp2612w.xml
   cfg.xml
-  devc074ad53085a.cfg	# XXX double-check this!
+  devffeeddccbbaa.cfg	# XXX double-check this!
 
 - the XML seems robust and compliant.
 
