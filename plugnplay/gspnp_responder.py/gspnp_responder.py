@@ -37,7 +37,7 @@ def log(s, prio=0):
 		print(f'{time.asctime()} | {s}', file=logf)
 
 def timestamp():
-	log('timestamp')
+	log('timestamp', 2)
 	eventloop.scheduler.enter(60, 0, timestamp)
 
 def q_outgoing(pkt, toaddr):
@@ -203,7 +203,8 @@ gspnp_responder [-vh] [url]
 	# EVENT_READ|EVENT_WRITE
 	eventloop.selector.register(srvsock, EVENT_READ|EVENT_WRITE, in_out)
 
-	#timestamp()		# XXX debugging
+	if loglvl > 1:
+		timestamp()		# run a heartbeat
 	eventloop.run()		# never exits
 
 if __name__ == "__main__":

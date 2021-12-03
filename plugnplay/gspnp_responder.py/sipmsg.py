@@ -17,7 +17,7 @@ def get_addr(s):
 	XXX needs to be expanded (a lot) if more SIPiness is desired
 		covers basic needs for the ua-profile stuff
 	"""
-	#               'lalala <sip:192.168.86.30:5080> xxx'
+	#               'lalala <sip:192.168.1.2:5080> xxx'
 	addr = re.compile('^[^<]*<([^:]+):([^:]+):([^:]+)>')
 	try:
 		method, host, port = addr.match(s).groups()
@@ -29,7 +29,7 @@ def get_mac(s):
 	"""
 	parse a special MAC-SIP address to extract just the MAC
 	"""
-	#               'lalala <sip:MAC%3AC074AD530480@224.0.1.75> xxx'
+	#               'lalala <sip:MAC%3AC074AD112233@224.0.1.75> xxx'
 	addr = re.compile('^[^<]*<[^:]+:MAC%3A([0-9A-Fa-f]{12})[^>]*>')
 	try:
 		mac = addr.match(s).groups()[0]
@@ -39,9 +39,9 @@ def get_mac(s):
 
 class hdr_field():
 	"""
-	raw = 'From: <sip:MAC%3AC074AD530480@224.0.1.75>;tag=395400190;rport'
+	raw = 'From: <sip:MAC%3AC074AD112233@224.0.1.75>;tag=395400190;rport'
 	name = 'From'
-	value = '<sip:MAC%3AC074AD530480@224.0.1.75>'
+	value = '<sip:MAC%3AC074AD112233@224.0.1.75>'
 	parms = [('tag', '395400190'),('rport', None)]
 	"""
 	def __init__(self, raw):
