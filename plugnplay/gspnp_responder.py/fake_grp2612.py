@@ -9,25 +9,6 @@ created: November, 2021
 Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
 """
 
-from const import MYADDRESS, SIPPORT, SIP_MCAST_NET
-import sockbits
-import sipmsg
-import sys
-
-def req():
-	sock = sockbits.open_socket(MYADDRESS)		# open UDP socket
-
-	#to = ('192.168.1.10', SIPPORT)		# XXX unicast a packet
-	to = (SIP_MCAST_NET, SIPPORT)		# multicast a packet
-
-	pkt = TEST_SUB_PKT
-	sock.sendto(pkt, to)
-
-try:
-	req()
-except KeyboardInterrupt:
-	...
-
 # XXX
 TEST_SUB_PKT = b'''\
 SUBSCRIBE sip:MAC%3AC074AD112233@224.0.1.75 SIP/2.0\r
@@ -47,4 +28,25 @@ Allow: INVITE, ACK, OPTIONS, CANCEL, BYE, SUBSCRIBE, NOTIFY, INFO, REFER, UPDATE
 Content-Length: 0\r
 \r
 '''
+
+from const import SIPPORT, SIP_MCAST_NET
+import sockbits
+import sipmsg
+import sys
+
+def req():
+	#myaddr = sockbits.my_addr_for()
+	myaddr = ('', 5080)
+	sock = sockbits.open_socket(myaddr)		# open UDP socket
+
+	#to = ('192.168.1.10', SIPPORT)		# XXX unicast a packet
+	to = (SIP_MCAST_NET, SIPPORT)		# multicast a packet
+
+	pkt = TEST_SUB_PKT
+	sock.sendto(pkt, to)
+
+try:
+	req()
+except KeyboardInterrupt:
+	...
 
