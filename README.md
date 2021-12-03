@@ -10,8 +10,11 @@ Tools to support using and administrating Grandstream Networks IP-phones and ATA
 - convert P-values to XML format files suitable for manual or automatic fetching
 - convert XML format back to P-values
 
-### Discovery
-- view provisioning beacons
+### Plug and Play / Discovery
+- view provisioning beacons from booting-up phones
+- return a configuration URL to the phones
+
+[Applies to the GRP26XX Carrier Grade series. Could be hacked to support Snom, likely others.]
 
 ### Ringtones
 - some reasonably decent recordings of vintage terminals and business phones as alternatives to the factory installed ones.
@@ -25,6 +28,7 @@ Tools to support using and administrating Grandstream Networks IP-phones and ATA
 
 - The command-line tools require a recent-ish Python 3 to be installed.
 - Tested on FreeBSD and macOS.
+- Should work fine on Linux flavours, and adaptable to Windows.
 
 ## Motivation
 
@@ -49,6 +53,7 @@ Grandstream Phonebook XML syntax - https://www.grandstream.com/hubfs/Product_Doc
 
 rfc2426 - vCard MIME Directory Profile [version 3.0] - https://datatracker.ietf.org/doc/html/rfc2426
 
+https://www.grandstream.com/hubfs/Product_Documentation/GRP2600_Plug_and_Play_Guide.pdf?hsLang=en
 
 
 ## Fine Print

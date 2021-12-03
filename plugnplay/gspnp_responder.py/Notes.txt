@@ -1,0 +1,42 @@
+GS-Plug-n-Play Responder - a ua-profile subscribe/notify server
+
+gspnp_responder [-q] [url]
+  -h   -- help; this message
+  -v   -- verbose; extra debug stuff
+  url  -- send configuration URL, eg http://192.168.1.2/gs/
+          if no url, passively log beacons
+
+XXX this format is mandatory! Must be a path ending in a slash (folder):
+    'http://192.168.2.4/tftp/xyzzy/'
+
+To-Do
+- argv
+  - daemonize
+  x URL
+  x no URL, beacon-only
+  x quiet by default; verbose option
+- hooks for BSD/Linux supervisord
+- self-daemonizing code
+  - log() should go via syslog() [and probably use the selector() loop]
+  - how to add to macOS daemon infrastructure?
+  - how to add to Windoze daemon infrastructure?
+
+Refs
+ https://www.grandstream.com/hubfs/Product_Documentation/GRP2600_Plug_and_Play_Guide.pdf
+ https://datatracker.ietf.org/doc/html/rfc3261#section-7.1
+ https://datatracker.ietf.org/doc/html/rfc6665#section-3.2
+
+
+send_notify(msg, frm):
+
+queue a NOTIFY message with our config URL in it
+
+XXX create a Dialog object now.
+	In theory. In practice I'll cheat since we're almost stateless
+a dialog-id is identified by:
+- Call-ID [from subscr req]
+- remote tag [from subscr req]
+- local tag [we create]
+rfc3261 sect 12
+
+
