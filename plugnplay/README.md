@@ -65,6 +65,8 @@ nginx                            RUNNING   pid 4706, uptime 1 day, 1:37:39
 [Supervisor: A Process Control System](http://supervisord.org/)
 
 [Auto-configuration “Plug and Play” Guide](https://www.grandstream.com/hubfs/Product_Documentation/GRP2600_Plug_and_Play_Guide.pdf?hsLang=en)
+
 [rfc6080 - A Framework for Session Initiation Protocol User Agent Profile Delivery](https://datatracker.ietf.org/doc/html/rfc6080)
+
 [rfc3261 - SIP: Session Initiation Protoco](https://datatracker.ietf.org/doc/html/rfc3261)
 
