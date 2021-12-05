@@ -37,7 +37,7 @@ def log(s, prio=0):
 		print(f'{time.asctime()} | {s}', file=logf)
 
 def timestamp():
-	log('timestamp', 2)
+	log('timestamp', 3)
 	eventloop.scheduler.enter(60, 0, timestamp)
 
 def q_outgoing(pkt, toaddr):
@@ -57,7 +57,7 @@ def outgoing(sock):
 	try:
 		pkt, toaddr = q.get_nowait()
 		sock.sendto(pkt.encode(), toaddr)
-		log(f'sendto {toaddr}: {pkt.encode()}', 1)
+		log(f'sendto {toaddr}: {pkt.encode()}', 2)
 
 	except queue.Empty:
 		eventloop.selector.modify(sock, EVENT_READ, in_out)
@@ -66,7 +66,7 @@ def response(msg, frm):
 	"""
 	we note any acknowledgement of our NOTIFY, but take no action.
 	"""
-	log(f'got "{msg.hdr_fields[0].raw}" from {frm}', 1)
+	log(f'got "{msg.hdr_fields[0].raw}" from {frm}', 2)
 
 def subscribe(msg, frm):
 	"""
@@ -75,15 +75,21 @@ def subscribe(msg, frm):
 	"""
 	try:
 		event = msg.find_1st('event').value
-		vendor = msg.find_1st('event').find('vendor')[1]
 	except (AttributeError, TypeError):
-		event = vendor = ''
+		event = ''
+	if event != 'ua-profile':
+		return
 
 	"""
 	we only handle ua-profile subscribe requests for Grandstream phones
 	per their Plug and Play "specification"
 	"""
-	if event != 'ua-profile' or vendor != 'Grandstream':
+	try:
+		vendor = msg.find_1st('event').find('vendor')[1]
+	except (AttributeError, TypeError):
+		vendor = 'unknown vendor'
+	if vendor != 'Grandstream':
+		log(f'SUBSCRIBE {frm[0]} {vendor}', 1)
 		return
 
 	try:
@@ -105,6 +111,7 @@ def subscribe(msg, frm):
 		    send the profile path URL in a NOTIFY """
 		q_outgoing(msg.response(), frm)
 		send_ua_profile(msg, frm)
+		log(f'NOTIFY {frm[0]} {cfg_url}', 1)
 
 def send_ua_profile(msg, frm):
 	"""
@@ -148,7 +155,7 @@ def incoming(sock):
 
 	m = sipmsg.msg(req)
 	method = m.parse()
-	log(f'received {method} from {frm}: {pkt}', 1)
+	log(f'received {method} from {frm}: {pkt}', 2)
 
 	if method == 'SUBSCRIBE':
 		subscribe(m, frm)
@@ -203,7 +210,7 @@ gspnp_responder [-vh] [url]
 	# EVENT_READ|EVENT_WRITE
 	eventloop.selector.register(srvsock, EVENT_READ|EVENT_WRITE, in_out)
 
-	if loglvl > 1:
+	if loglvl > 2:
 		timestamp()		# run a heartbeat
 	eventloop.run()		# never exits
 
