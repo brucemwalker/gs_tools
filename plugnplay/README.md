@@ -7,6 +7,20 @@ broadcasts from GRP26XX-series phones during every boot process,
 logs details to stderr, and optionally responds with a configuration
 URL that the phone will use to read config files from.
 
+## Environment
+
+The application is written in pure Python 3 and requires no extra
+classes or libraries beyond the stock Python installation.
+
+It was developed and tested under macOS 12 (Monterey) and FreeBSD
+13.  I expect it will run without changes under pretty much any
+flavour of Linux. It will most likely run in some fashion under
+Windows if Python is installed, but don't hold me to that. I will
+test that later on.
+
+On macOS you will possibly need to install a more recent Python than
+the OS comes with. See [MacPorts](https://www.macports.org/) for that.
+
 ## Command line arguments
 ```
 % ./gspnp_responder -h
@@ -64,9 +78,9 @@ nginx                            RUNNING   pid 4706, uptime 1 day, 1:37:39
 
 [Supervisor: A Process Control System](http://supervisord.org/)
 
-[Auto-configuration “Plug and Play” Guide](https://www.grandstream.com/hubfs/Product_Documentation/GRP2600_Plug_and_Play_Guide.pdf?hsLang=en)
+[Auto-configuration “Plug and Play” Guide [PDF]](https://www.grandstream.com/hubfs/Product_Documentation/GRP2600_Plug_and_Play_Guide.pdf?hsLang=en)
 
 [rfc6080 - A Framework for Session Initiation Protocol User Agent Profile Delivery](https://datatracker.ietf.org/doc/html/rfc6080)
 
-[rfc3261 - SIP: Session Initiation Protoco](https://datatracker.ietf.org/doc/html/rfc3261)
+[rfc3261 - SIP: Session Initiation Protocol](https://datatracker.ietf.org/doc/html/rfc3261)
 
