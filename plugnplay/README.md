@@ -9,14 +9,14 @@ URL that the phone will use to read config files from.
 
 ## Environment
 
-The application is written in pure Python 3 and requires no extra
+The application is written in pure Python3 and requires no extra
 classes or libraries beyond the stock Python installation.
 
 It was developed and tested under macOS 12 (Monterey) and FreeBSD
 13.  I expect it will run without changes under pretty much any
-flavour of Linux. It will most likely run in some fashion under
-Windows if Python is installed, but don't hold me to that. I will
-test that later on.
+flavour of macOS, BSD and Linux. It will most likely run in some
+fashion under Windows if Python3 is installed, but don't hold me
+to that.  I will test that later on.
 
 On macOS you will possibly need to install a more recent Python than
 the OS comes with. See [MacPorts](https://www.macports.org/) for that.
