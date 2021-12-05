@@ -34,7 +34,7 @@ logf = sys.stderr
 
 def log(s, prio=0):
 	if prio <= loglvl:
-		print(f'{time.asctime()} | {s}', file=logf)
+		print(f'{time.asctime()} | {s}', file=logf, flush=True)
 
 def timestamp():
 	log('timestamp', 3)
