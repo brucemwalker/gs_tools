@@ -181,6 +181,5 @@ GRP26XX phones will read it.
 
 ## Fine Print
 
-Copyright (c) 2021, Bruce Walker -- see the file
-[LICENSE](https://github.com/brucemwalker/gs_tools/blob/main/LICENSE).
+Copyright (c) 2021, Bruce Walker -- see the file [LICENSE](../LICENSE).
 
