@@ -38,7 +38,10 @@ A provided URL will be sent (in a SIP NOTIFY request) in response to
 a SIP subscribe ua-profile event request from a Grandstream phone.
 Grandstream stipulates that a valid URL must be a path with a trailing
 slash and that the usual config files will be searched-for under
-that path. Eg: `http://192.168.1.2/gs/`
+that path. Eg: `http://192.168.1.2/gs/`.
+If you see URLs being sent to your phone but the phone is not configuring,
+check your URL syntax first. The phone will silently ignore any URL sent it
+that it doesn't like.
 
 If no URL is provided it passively reports phone broadcasts as it 
 sees them, but takes no other action.
@@ -46,8 +49,8 @@ sees them, but takes no other action.
 One `-v` option will make `gspnp_responder` print a log when we send a profile
 URL to a phone.
 It will also report profile requests from other vendors besides
-Grandstream, like Snom. There's no support for sending profile URLs
-to them though. 
+Grandstream, like Snom. (There's no support for sending profile URLs
+to them though.)
 
 Two `-v` options will enable some debugging output, like dumping the
 entire packet contents of SIP subscribe and notify requests as well
@@ -71,7 +74,7 @@ Sun Dec  5 15:13:08 2021 | SUBSCRIBE mac:c074ad515e41 192.168.1.2 Grandstream GR
 For use as a permanent system service, `gspnp_responder` is designed to be
 managed by [supervisor](http://supervisord.org/).
 
-Copy the application file `gspnp_responder` to a system directory.
+Copy the application executable `gspnp_responder` to a system directory.
 On FreeBSD I suggest `/usr/local/sbin`. Make sure it's set to be
 executable.
 ```
@@ -118,14 +121,14 @@ shared secret--using just the phone keyboard is *really* annoying.
 So my procedure now is to run an instance of `gspnp_responder` on
 a laptop or mini-PC with an ethernet port and a web server
 (like the opensource [nginx](https://nginx.org/)).
-Then I connect the GRP2612W phone with a CAT-5 patch cable to the
-laptop and reboot it.  The phone will send its beacon, `gspnp_responder`
-will send back the configuration URL (through a SIP NOTIFY ua-profile
-event message) and the phone will read a configuration file from
-the dedicated web server on the laptop. That configuration file
-will contain settings to program the WiFi settings so that once the
-phone reboost it will be on my office WiFi network where I can
-connect to it to finish setup.
+Then I temporarily connect the GRP2612W phone with a CAT-5 patch
+cable to the laptop and reboot it.  The phone will send its beacon,
+`gspnp_responder` will send back the configuration URL (through a
+SIP NOTIFY ua-profile event message) and the phone will read a
+configuration file from the dedicated web server on the laptop.
+That configuration file will contain values to program the WiFi
+settings so that once the phone reboots it will be on my office
+WiFi network where I can connect to it to finish setup.
 
 Some example p-values are:
 ```
@@ -182,5 +185,6 @@ GRP26XX phones will read it.
 
 ## Fine Print
 
-Copyright (c) 2021, Bruce Walker -- see the file LICENSE.
+Copyright (c) 2021, Bruce Walker -- see the file
+[LICENSE](https://github.com/brucemwalker/gs_tools/blob/main/LICENSE).
 
