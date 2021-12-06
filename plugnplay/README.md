@@ -1,18 +1,19 @@
 # Grandstream Plug and Play Responder
 ## Description
 
-This application runs either standalone or as a system daemon
-(background process). It watches for Grandstream Plug and Play
-broadcasts from GRP26XX-series phones during every boot process,
-logs details to stderr, and optionally responds with a configuration
-URL that the phone will use to read config files from.
+This application runs either standalone in a terminal window or as
+a system daemon (background process). It listens for Grandstream
+Plug and Play broadcasts from GRP26XX-series phones during every
+boot process, logs details to stderr, and optionally responds with
+a configuration URL that the phone will use to read config files
+from.
 
 ## Environment
 
 The application is written in pure Python3 and requires no extra
 classes or libraries beyond the stock Python installation.
 
-It was developed and tested under macOS 12 (Monterey) and FreeBSD
+I developed and tested it under macOS 12 (Monterey) and FreeBSD
 13.  I expect it will run without changes under pretty much any
 flavour of macOS, BSD and Linux. It will most likely run in some
 fashion under Windows if Python3 is installed, but don't hold me
@@ -23,7 +24,7 @@ the OS comes installed with. I recommend
 [MacPorts](https://www.macports.org/)
 for that.
 
-## Command line arguments
+## Command line options
 ```
 % ./gspnp_responder -h
 gspnp_responder [-vh] [url]
@@ -32,6 +33,25 @@ gspnp_responder [-vh] [url]
   url  -- send configuration URL, eg http://192.168.1.2/gs/
           if no url, passively log beacons
 ```
+
+A provided URL will be sent (in a SIP NOTIFY request) in response to
+a SIP subscribe ua-profile event request from a Grandstream phone.
+Grandstream stipulates that a valid URL must be a path with a trailing
+slash and that the usual config files will be searched-for under
+that path. Eg: `http://192.168.1.2/gs/`
+
+If no URL is provided it passively reports phone broadcasts as it 
+sees them, but takes no other action.
+
+One `-v` option will make `gspnp_responder` print a log when we send a profile
+URL to a phone.
+It will also report profile requests from other vendors besides
+Grandstream, like Snom. There's no support for sending profile URLs
+to them though. 
+
+Two `-v` options will enable some debugging output, like dumping the
+entire packet contents of SIP subscribe and notify requests as well
+as the SIP responses.
 
 ## Installation and use
 ### Standalone utility
@@ -77,7 +97,6 @@ nginx                            RUNNING   pid 4706, uptime 1 day, 1:37:39
 ```
 
 ## Usage notes
-
 ### Network considerations
 The Grandstream "Plug and Play" protocol makes use of the SIP
 protocol for discovering a user-agent profile. This involves the
