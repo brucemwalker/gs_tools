@@ -173,15 +173,11 @@ GRP26XX phones will read it.
 
 ## See also
 
-[Supervisor: A Process Control System](http://supervisord.org/)
-
-[Auto-configuration “Plug and Play” Guide [PDF]](https://www.grandstream.com/hubfs/Product_Documentation/GRP2600_Plug_and_Play_Guide.pdf?hsLang=en)
-
-[rfc6080 - A Framework for Session Initiation Protocol User Agent Profile Delivery](https://datatracker.ietf.org/doc/html/rfc6080)
-
-[rfc3261 - SIP: Session Initiation Protocol](https://datatracker.ietf.org/doc/html/rfc3261)
-
-[Grandstream GRP Series of Professional IP Phones](https://www.grandstream.com/products/ip-voice-telephony/carrier-grade-ip-phones?hsLang=en)
+- [Supervisor: A Process Control System](http://supervisord.org/)
+- [Auto-configuration “Plug and Play” Guide [PDF]](https://www.grandstream.com/hubfs/Product_Documentation/GRP2600_Plug_and_Play_Guide.pdf?hsLang=en)
+- [rfc6080 - A Framework for Session Initiation Protocol User Agent Profile Delivery](https://datatracker.ietf.org/doc/html/rfc6080)
+- [rfc3261 - SIP: Session Initiation Protocol](https://datatracker.ietf.org/doc/html/rfc3261)
+- [Grandstream GRP Series of Professional IP Phones](https://www.grandstream.com/products/ip-voice-telephony/carrier-grade-ip-phones?hsLang=en)
 
 ## Fine Print
 
