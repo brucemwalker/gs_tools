@@ -145,9 +145,8 @@ P8405 = 4
 ```
 
 If you convert these to Grandstream XML--you can use my `pvalues2xml`
-conversion tool in this package; see
-[Provisioning](https://github.com/brucemwalker/gs_tools/tree/main/provisioning)
---you'll get:
+conversion tool in this package;
+see [Provisioning](../provisioning)--you'll get:
 ```
 % pvalues2xml.py GRP261X.txt | xmllint --format -
 <?xml version="1.0" encoding="UTF-8"?>
