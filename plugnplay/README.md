@@ -15,9 +15,10 @@ classes or libraries beyond the stock Python installation.
 
 I developed and tested it under macOS 12 (Monterey) and FreeBSD
 13.  I expect it will run without changes under pretty much any
-flavour of macOS, BSD and Linux. It will most likely run in some
-fashion under Windows if Python3 is installed, but don't hold me
-to that.  I will test that later on.
+flavour of macOS, BSD and Linux. It runs
+under Windows if Python3 is installed (Windows 11 tested).
+Get the Windows installer from here: [Download Windows installer (64-bit)](https://www.python.org/downloads/windows/).
+Also rename `gspnp_responder` to `gspnp_responder.py`.
 
 On macOS you will possibly need to install a more recent Python than
 the OS comes installed with. I recommend

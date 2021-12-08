@@ -27,8 +27,7 @@ support Snom, likely others.
 
 ## What you need
 - The command-line tools require a recent-ish Python3 to be installed.
-- Tested on FreeBSD and macOS.
-- contacts2gs and pvalues2xml run fine on Windows with Python3 installed.
+- Tested on FreeBSD, macOS and Windows 11
 - Should work fine on Linux flavours.
 
 ## Motivation
