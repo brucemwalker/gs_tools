@@ -75,8 +75,8 @@ PS C:\Users\Bruce Walker\Desktop> type pvalues.xml
 ```
 
 On macOS you might possibly need to install a more recent Python than
-the OS comes installed with. I recommend installing 
-[MacPorts](https://www.macports.org/)
+the OS comes installed with. I recommend the Python.org macOS installer
+[macOS 64-bit universal2 installer](https://www.python.org/downloads/macos/)
 for that.
 
 ### Installing

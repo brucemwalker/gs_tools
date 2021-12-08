@@ -21,12 +21,12 @@ Get the Windows installer from here: [Download Windows installer (64-bit)](https
 Also rename `gspnp_responder` to `gspnp_responder.py`.
 
 When you launch `gspnp_responder.py` the Windows Firewall will popup
-a warning. You must enable access for the modes you are in or likely
-to switch to, eg Public and Private networks.
+a warning. You must enable access for the Network Profile Types you
+are in or likely to switch to, eg Public and Private networks.
 
-On macOS you will possibly need to install a more recent Python than
-the OS comes installed with. I recommend
-[MacPorts](https://www.macports.org/)
+On macOS you will most likely need to install a more recent Python than
+the OS comes installed with. I recommend the Python.org macOS installer
+[macOS 64-bit universal2 installer](https://www.python.org/downloads/macos/)
 for that.
 
 ## Command line options

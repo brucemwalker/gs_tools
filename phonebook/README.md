@@ -58,8 +58,8 @@ Get the Windows installer from here: [Download Windows installer (64-bit)](https
 Also rename `contacts2gs` to `contacts2gs.py`.
 
 On macOS you might possibly need to install a more recent Python than
-the OS comes installed with. I recommend installing 
-[MacPorts](https://www.macports.org/)
+the OS comes installed with. I recommend the Python.org macOS installer
+[macOS 64-bit universal2 installer](https://www.python.org/downloads/macos/)
 for that.
 
 ## Command line options
