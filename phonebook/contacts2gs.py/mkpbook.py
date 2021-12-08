@@ -158,7 +158,7 @@ def main(argv):
 			if not os.path.isfile(ctfile):
 				print(f'{ctfile}: not found', file=sys.stderr)
 				continue
-			with open(ctfile, newline='') as cf:
+			with open(ctfile, newline='', encoding='utf-8') as cf:
 				ft = ftype if ftype else CT.sniff(cf)
 				if ft == 'csv':
 					stats = CT.csv_to_phonebook(cf, addrbook, incgroups, faves)
