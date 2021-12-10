@@ -3,7 +3,7 @@
 
 This application runs either standalone in a terminal window or as
 a system daemon (background process). It listens for Grandstream
-Plug and Play broadcasts from GRP26XX-series phones during every
+Plug and Play broadcasts from GRP26XX and GXPXXXX series phones during every
 boot process, logs details to stderr, and optionally responds with
 a configuration URL that the phone will use to read config files
 from.
@@ -66,7 +66,7 @@ as the SIP responses.
 
 You can launch `gspnp_responder` in a terminal window where it will
 run until killed (eg control-C). Run without arguments it passively
-displays the details of any GRP26XX series phone it sees booting.
+displays the details of any GRP26XX or GXPXXXX series phone it sees booting.
 
 Eg:
 ```
@@ -173,7 +173,7 @@ see [Provisioning](../provisioning)--you'll get:
 ```
 
 Save that in a file called `cfg.xml` in the web server and all
-GRP26XX phones will read it.
+GRP26XX and GXPXXXX phones will read it.
 
 ## See also
 

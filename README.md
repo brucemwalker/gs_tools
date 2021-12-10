@@ -4,7 +4,7 @@ Tools to support using and administrating Grandstream Networks
 IP-phones and ATA's.
 
 ### Phonebook
-- convert Google Contacts CSV and Apple macOS vCard export files into Grandstream Phonebook XML compatible with the GRP26XX Carrier Grade (and possibly GXPxxxx) IP phones
+- convert Google Contacts CSV and Apple macOS vCard export files into Grandstream Phonebook XML compatible with the GRP26XX Carrier Grade as well as the GXPxxxx IP phones
 
 ### Provisioning
 - convert P-values to XML format files suitable for manual or automatic fetching
@@ -14,8 +14,9 @@ IP-phones and ATA's.
 - view provisioning beacons from booting-up phones
 - return a configuration URL to the phones, or not
 
-Applies to the GRP26XX Carrier Grade series. Could be hacked to
-support Snom, likely others.
+Applies to the GRP26XX Carrier Grade series,
+and the GXP21xx, GXP17xx and GXP16xx series IP phones.
+Could be hacked to support Snom, likely others.
 
 ### Ringtones
 - some reasonably decent recordings of vintage terminals and business phones as alternatives to the factory installed ones. [TBD]

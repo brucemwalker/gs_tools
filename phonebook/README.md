@@ -4,7 +4,7 @@ Convert Google Contacts and macOS Contacts.app export files to Grandstream
 Addressbook XML format for use with Grandstream phones.
 
 ## Who is this for?
-Grandstream GRP26XX-series phones support uploaded phonebooks for
+Grandstream GRP26XX and GXPXXXX series phones support uploaded phonebooks for
 dialing assistance and to display name lookups for incoming calls.
 But they expect a proprietary XML format which is only supported
 by their own
