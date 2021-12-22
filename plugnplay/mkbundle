@@ -1,4 +1,4 @@
 #!/bin/sh -f
 
-python -m zipapp gspnp_responder.py -p '/usr/bin/env python3' -o gspnp_responder -c
+python3 -m zipapp gspnp_responder.py -p '/usr/bin/env python3' -o gspnp_responder -c
 
